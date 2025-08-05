@@ -3,7 +3,7 @@ const router = express.Router();
 const { pool, sql } = require('../config/db');
 const authenticateToken = require('../middleware/auth');
 
-// GET all tasks for logged-in user
+//Get all tasks for logged-in user
 router.get('/', authenticateToken, async (req, res) => {
   try {
     const result = await pool.request()
@@ -16,7 +16,7 @@ router.get('/', authenticateToken, async (req, res) => {
   }
 });
 
-// POST new task
+//Create a new task
 router.post('/', authenticateToken, async (req, res) => {
   const { title, description } = req.body;
 
@@ -37,7 +37,7 @@ router.post('/', authenticateToken, async (req, res) => {
   }
 });
 
-// PUT update task
+//Update a task
 router.put('/:id', authenticateToken, async (req, res) => {
   const { title, description, completed } = req.body;
   const { id } = req.params;
@@ -62,7 +62,7 @@ router.put('/:id', authenticateToken, async (req, res) => {
   }
 });
 
-// DELETE task
+//Delete a task
 router.delete('/:id', authenticateToken, async (req, res) => {
   const { id } = req.params;
 
