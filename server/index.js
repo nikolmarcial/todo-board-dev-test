@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const { pool, sql } = require('./config/db');
+const authenticateToken = require('./middleware/auth');
 
 //Used for login
 const bcrypt = require('bcrypt');
@@ -9,16 +10,16 @@ const jwt = require('jsonwebtoken');
 
 const PORT = process.env.PORT || 5000;
 
-const authenticateToken = require('./middleware/auth');
-
 //Middleware to parse JSON
 app.use(express.json());
+
+const tasksRoute = require('./routes/tasks');
+app.use('/api/tasks', authenticateToken, tasksRoute);
 
 //Root Route
 app.get('/', (req, res) => {
   res.send('SQL Server is WORKING!');
 });
-
 
 //Get all users
 app.get('/api/users', async (req, res) => {
