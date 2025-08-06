@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-//Register new user
+// Register new user
 router.post(
   '/register',
   [
@@ -52,6 +52,15 @@ router.post(
         .status(201)
         .json({ success: true, message: 'User registered successfully' });
     } catch (err) {
+      if (
+        err.originalError &&
+        err.originalError.code === 2627 // SQL Server code for duplicate key
+      ) {
+        return res
+          .status(409)
+          .json({ success: false, message: 'Username already exists' });
+      }
+
       console.error('Registration Error:', err);
       res
         .status(500)
@@ -59,6 +68,7 @@ router.post(
     }
   }
 );
+
 
 //Login a user
 router.post('/login', async (req, res) => {
@@ -101,9 +111,9 @@ router.post('/login', async (req, res) => {
 
 //Protected Route
 router.get('/protected', authenticateToken, (req, res) => {
-  res.send(
-    `Hello ${req.user.username}, you have accessed a protected route!`
-  );
+  res.json({
+    message: `Hello ${req.user.username}, you have accessed a protected route!`
+  });
 });
 
 module.exports = router;
