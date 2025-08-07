@@ -1,1 +1,19 @@
-<p>task-list works!</p>
+<div class="task-list-container">
+  <h2>My Tasks</h2>
+
+  <div *ngIf="loading" class="loading">Loading tasks...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <div *ngIf="tasks.length === 0 && !loading">No tasks found.</div>
+
+  <div class="task-card" *ngFor="let task of tasks" [style.border-left-color]="getStatusColor(task.label)">
+    <div class="task-header">
+      <h3>{{ task.title }}</h3>
+      <span class="task-label">{{ task.label }}</span>
+    </div>
+    <p class="description">{{ task.description }}</p>
+    <div class="footer">
+      <span>Due: {{ task.due_date | date: 'mediumDate' }}</span>
+    </div>
+  </div>
+</div>

@@ -1,33 +1,52 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/auth.service';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatCard, MatCardModule } from '@angular/material/card';
+import { MatError, MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
+    MatSnackBarModule,
+    RouterModule
+  ],
   selector: 'app-login',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  username = '';
-  password = '';
+  loginForm: FormGroup;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder, private snackBar: MatSnackBar) {
+    this.loginForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
 
   onLogin() {
-    this.auth.login({ username: this.username, password: this.password })
-      .subscribe({
-        next: (res) => {
-          this.auth.saveToken(res.token);
-          alert('Login successful!');
-          this.router.navigate(['/tasks']);
-        },
-        error: (err) => {
-          console.error(err);
-          alert('Login failed.');
-        }
-      });
+    if (this.loginForm.invalid) return;
+
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (res) => {
+        this.snackBar.open('Login successful', 'Close', { duration: 3000 });
+        this.router.navigate(['/tasks']);
+      },
+      error: (err) => {
+        this.snackBar.open('Login failed: Invalid credentials', 'Close', { duration: 3000 });
+      }
+    });
   }
 }

@@ -1,0 +1,35 @@
+.dashboard-wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f4f6f8;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+}
+
+.app-title {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.dashboard-content {
+  display: flex;
+  flex: 1;
+  gap: 2rem;
+  padding: 2rem;
+  overflow: auto;
+}
+
+.task-list,
+.task-create {
+  flex: 1;
+  padding: 2rem;
+}

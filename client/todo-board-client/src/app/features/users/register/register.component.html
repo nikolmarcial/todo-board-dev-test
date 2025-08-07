@@ -1,6 +1,37 @@
-<h2>Register</h2>
-<form (ngSubmit)="onRegister()">
-  <input type="text" [(ngModel)]="username" name="username" placeholder="Username" required>
-  <input type="password" [(ngModel)]="password" name="password" placeholder="Password" required>
-  <button type="submit">Register</button>
-</form>
+<div class="page-wrapper">
+  <div class="form-container">
+    <div class="form-card">
+      <h2>Register</h2>
+
+      <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Username</mat-label>
+          <input matInput formControlName="username" />
+          <mat-error *ngIf="registerForm.get('username')?.hasError('required')">
+            Username is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" />
+          <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
+            Password is required
+          </mat-error>
+          <mat-error *ngIf="registerForm.get('password')?.hasError('minlength')">
+            Password must be at least 6 characters
+          </mat-error>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" class="submit-btn" type="submit">
+          Register
+        </button>
+
+          <p style="margin-top: 1rem;">
+          Go back to
+          <a routerLink="/login" style="color: #3f51b5; font-weight: 500; cursor: pointer;">Login</a>
+        </p>
+      </form>
+    </div>
+  </div>
+</div>

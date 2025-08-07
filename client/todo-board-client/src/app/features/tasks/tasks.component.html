@@ -1,0 +1,17 @@
+<div class="dashboard-wrapper">
+  <mat-toolbar color="primary" class="toolbar">
+    <span class="app-title">Todo Board</span>
+    <span class="spacer"></span>
+    <button mat-button (click)="logout()">Logout</button>
+  </mat-toolbar>
+
+  <div class="dashboard-content">
+    <div class="task-list">
+        <app-task-list [tasks]="tasks"></app-task-list>
+    </div>
+
+    <div class="task-create">
+        <app-task-create (taskCreated)="loadTasks()"></app-task-create>
+    </div>
+  </div>
+</div>
