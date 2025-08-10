@@ -6,7 +6,7 @@
     (drop)="onDrop($event, column)"
     (dragover)="onDragOver($event)"
   >
-    <h2>{{ column }}</h2>
+    <h2 class="column-title">{{ column }}</h2>
     <div
       class="task-card"
       *ngFor="let task of getTasksByLabel(column)"
@@ -30,7 +30,7 @@
           Draft
         </span>
       </h4>
-      <p>{{ task.description }}</p>
+      <p >{{ task.description }}</p>
       <small>Due: {{ task.due_date | date: "mediumDate" }}</small>
     </div>
   </div>
