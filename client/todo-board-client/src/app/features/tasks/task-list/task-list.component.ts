@@ -8,6 +8,11 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { TaskService } from '../task.service';
+import {
+  MatDialogActions,
+  MatDialogContent,
+  MatDialogRef,
+} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-task-list',
@@ -19,35 +24,48 @@ import { TaskService } from '../task.service';
     MatCardModule,
     MatSnackBarModule,
     MatListModule,
-    MatTableModule
+    MatDialogContent,
+    MatDialogActions,
   ],
-  templateUrl: './task-list.component.html',
-  styleUrl: './task-list.component.scss'
+  template: `
+    <h2 mat-dialog-title>Tasks Due for Today</h2>
+    <mat-dialog-content>
+      <div *ngIf="loading">Loading...</div>
+      <div *ngIf="tasks.length === 0 && !loading">No tasks due today.</div>
+      <mat-list>
+        <mat-list-item *ngFor="let task of tasks">
+          <strong [style.color]="getStatusColor(task.label)">
+            {{ task.label }}
+          </strong>
+          &nbsp;– {{ task.title }}
+        </mat-list-item>
+      </mat-list>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button (click)="close()">Close</button>
+    </mat-dialog-actions>
+  `,
+  styleUrl: './task-list.component.scss',
 })
 export class TaskListComponent {
+  tasks: any[] = [];
+  loading = true;
 
-  @Input() tasks: any[] = [];
-  loading = false;
-  error: string | null = null;
-
-   constructor(private taskService: TaskService) {}
+  constructor(
+    private taskService: TaskService,
+    private dialogRef: MatDialogRef<TaskListComponent>,
+  ) {}
 
   ngOnInit(): void {
-    this.fetchTasks();
-  }
-
-  fetchTasks(): void {
-    this.loading = true;
     this.taskService.getTasks().subscribe({
       next: (data) => {
-        this.tasks = data;
+        const today = new Date().toDateString();
+        this.tasks = data.filter(
+          (t) => new Date(t.due_date).toDateString() === today,
+        );
         this.loading = false;
       },
-      error: (err) => {
-        this.error = 'Failed to load tasks';
-        this.loading = false;
-        console.error(err);
-      }
+      error: () => (this.loading = false),
     });
   }
 
@@ -62,5 +80,9 @@ export class TaskListComponent {
       default:
         return '#9e9e9e';
     }
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 }

@@ -2,34 +2,122 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: #f4f6f8;
+  background-color: #ffffff;
 }
 
 .toolbar {
   display: flex;
   justify-content: space-between;
   padding: 0 1.5rem;
+  background-color: #ffffff;
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .app-title {
-  font-weight: 600;
-  font-size: 1.25rem;
+  font-weight: bold;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.spacer {
-  flex: 1 1 auto;
+.user-greeting {
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: black;
 }
 
 .dashboard-content {
   display: flex;
   flex: 1;
-  gap: 2rem;
-  padding: 2rem;
   overflow: auto;
 }
 
 .task-list,
 .task-create {
   flex: 1;
-  padding: 2rem;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: #3f51b5;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-size: 1.1rem;
+
+  &:hover {
+    color: #fdd835; // a soft yellow on hover
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.fab-button-create {
+  position: fixed;
+  bottom: 3rem;
+  right: 7rem;
+  z-index: 1000;
+  width: 60px;
+  height: 60px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3f51b5; // Material primary color
+  color: white;
+  font-size: 5rem; // size of the icon/text
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.fab-button-today {
+  position: fixed;
+  bottom: 3rem;
+  right: 3rem;
+  z-index: 1000;
+  width: 60px;
+  height: 60px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #3f51b5; // Material primary color
+  color: white;
+  font-size: 5rem; // size of the icon/text
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.fab-button:hover {
+  background-color: #303f9f; // darker shade on hover
+}
+
+.fab-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }

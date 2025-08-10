@@ -1,62 +1,47 @@
-.task-list-container {
-  padding: 2rem;
-  max-width: 800px;
-  margin: auto;
+:host {
+  display: block;
+  max-height: 70vh; // Prevents dialog overflow
+  overflow-y: auto;
 }
 
-h2 {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.loading,
-.error {
-  text-align: center;
-  margin: 1rem 0;
+h2[mat-dialog-title] {
+  margin: 0 0 1rem;
   font-weight: 600;
+  color: #333;
 }
 
-.task-card {
-  background: #fff;
-  border-left: 8px solid #ccc;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 1rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-  transition: transform 0.2s ease;
+mat-dialog-content {
+  padding-right: 8px; // space for scrollbar
+}
 
-  &:hover {
-    transform: translateY(-4px);
-  }
+mat-list {
+  padding: 0;
 
-  .task-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    h3 {
-      margin: 0;
-    }
-
-    .task-label {
-      font-size: 0.85rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      color: #555;
-      background-color: #f0f0f0;
-      padding: 4px 10px;
-      border-radius: 4px;
-    }
-  }
-
-  .description {
-    margin: 1rem 0;
+  mat-list-item {
     font-size: 0.95rem;
-  }
+    line-height: 1.4;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
 
-  .footer {
-    font-size: 0.8rem;
-    color: #666;
-    text-align: right;
+    &:last-child {
+      border-bottom: none;
+    }
+
+    strong {
+      font-weight: 600;
+    }
   }
+}
+
+:host::-webkit-scrollbar {
+  width: 6px;
+}
+
+:host::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 3px;
+}
+
+:host::-webkit-scrollbar-thumb:hover {
+  background: #999;
 }

@@ -1,5 +1,9 @@
 <div class="task-create-wrapper">
-  <form [formGroup]="taskForm" (ngSubmit)="createOrEditTask()" class="task-form">
+  <form
+    [formGroup]="taskForm"
+    (ngSubmit)="createOrEditTask()"
+    class="task-form"
+  >
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Title</mat-label>
       <input matInput formControlName="title" required />
@@ -27,7 +31,12 @@
 
     <mat-form-field appearance="outline" class="full-width">
       <mat-label>Due Date</mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="due_date" required />
+      <input
+        matInput
+        [matDatepicker]="picker"
+        formControlName="due_date"
+        required
+      />
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
       <mat-error *ngIf="taskForm.get('due_date')?.hasError('required')">
@@ -35,9 +44,60 @@
       </mat-error>
     </mat-form-field>
 
+    <div *ngIf="editMode" class="history-section">
+      <mat-divider></mat-divider>
+
+      <div class="history-toggle-container">
+        <button
+          type="button"
+          mat-stroked-button
+          color="primary"
+          (click)="showHistory = !showHistory"
+        >
+          {{ showHistory ? "Hide" : "Show" }} History
+        </button>
+      </div>
+
+      <div [@slideToggle] *ngIf="showHistory">
+        <div *ngIf="history.length > 0" class="history-list">
+          <div *ngFor="let h of history" class="history-item">
+            <strong>{{ h.old_label || "None" }}</strong> →
+            <strong>{{ h.new_label }}</strong>
+            <br />
+            <small>{{ h.changed_at | date: "medium" : "UTC" }}</small>
+          </div>
+        </div>
+
+        <div *ngIf="history.length === 0" class="no-history">
+          No history available.
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+    </div>
+
     <div class="button-container">
       <button mat-raised-button color="primary" type="submit">
-        {{ editMode ? 'Update Task' : 'Create Task' }}
+        {{ editMode ? "Update Task" : "Create Task" }}
+      </button>
+
+      <button
+        mat-button
+        type="button"
+        class="close-button"
+        (click)="closeDialog()"
+      >
+        Close
+      </button>
+
+      <button
+        mat-button
+        *ngIf="editMode"
+        class="close-button"
+        type="button"
+        (click)="deleteTask()"
+      >
+        Delete
       </button>
     </div>
   </form>

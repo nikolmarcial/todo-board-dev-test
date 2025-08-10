@@ -2,8 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding: 2rem;
-  min-height: 80vh;
 }
 
 .task-form {
@@ -22,8 +20,9 @@
 
 .button-container {
   display: flex;
-  justify-content: center;
-  margin-top: 1.5rem;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 .snackbar-success {
@@ -34,4 +33,36 @@
 .snackbar-error {
   background-color: #f44336;
   color: #fff;
+}
+
+.close-button {
+  color: #f44336 !important;
+}
+
+.history-section {
+  .history-toggle-container {
+    display: flex;
+    justify-content: center;
+    margin: 8px 0;
+  }
+
+  .history-list {
+    max-height: 150px;
+    overflow-y: auto;
+    padding-right: 8px;
+  }
+
+  .history-item {
+    padding: 4px 0;
+    border-bottom: 1px solid #e0e0e0;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  .no-history {
+    text-align: center;
+    padding: 8px;
+    color: #777;
+  }
 }

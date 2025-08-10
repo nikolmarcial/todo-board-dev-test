@@ -1,0 +1,37 @@
+<div class="board-container">
+  <div
+    class="column"
+    *ngFor="let column of columns"
+    [style.border-top-color]="getStatusColor(column)"
+    (drop)="onDrop($event, column)"
+    (dragover)="onDragOver($event)"
+  >
+    <h2>{{ column }}</h2>
+    <div
+      class="task-card"
+      *ngFor="let task of getTasksByLabel(column)"
+      [ngStyle]="{ 'background-color': getCardColor(task.label) }"
+      [style.border-left-color]="getStatusColor(task.label)"
+      draggable="true"
+      (dragstart)="onDragStart($event, task.id)"
+      (click)="openEditTaskDialog(task)"
+    >
+      <h4>
+        {{ task.title }}
+        <span *ngIf="task.isExpiringSoon" class="badge badge-warning"
+          >Due Soon</span
+        >
+        <span *ngIf="task.isOverdue" class="badge badge-danger">Overdue</span>
+        <span
+          class="draft-badge"
+          [class.stack-below]="task.isExpiringSoon || task.isOverdue"
+          *ngIf="hasDraft(task.id)"
+        >
+          Draft
+        </span>
+      </h4>
+      <p>{{ task.description }}</p>
+      <small>Due: {{ task.due_date | date: "mediumDate" }}</small>
+    </div>
+  </div>
+</div>

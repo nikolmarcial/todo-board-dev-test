@@ -3,19 +3,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-
   private apiUrl = 'http://localhost:5000/api/users';
 
   constructor(private http: HttpClient) {}
 
-  register(data: { username: string, password: string }): Observable<any> {
+  register(data: { username: string; password: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}/register`, data);
   }
 
-  login(data: { username: string, password: string }): Observable<any> {
+  login(data: { username: string; password: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, data);
   }
 
@@ -23,9 +22,9 @@ export class UserService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get('http://localhost:5000/api/users/protected', {
       headers: new HttpHeaders({
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       }),
-      responseType: 'text'
-    });  
+      responseType: 'text',
+    });
   }
 }

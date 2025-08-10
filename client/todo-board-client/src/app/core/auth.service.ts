@@ -13,11 +13,14 @@ export class AuthService {
   }
 
   login(data: { username: string; password: string }): Observable<any> {
-  return this.http.post<{ token: string }>(`${this.apiUrl}/users/login`, data).pipe(
-    tap(res => {
-      localStorage.setItem('token', res.token);
-    })
-  );  }
+    return this.http
+      .post<{ token: string }>(`${this.apiUrl}/users/login`, data)
+      .pipe(
+        tap((res) => {
+          localStorage.setItem('token', res.token);
+        }),
+      );
+  }
 
   saveToken(token: string): void {
     localStorage.setItem('token', token);
@@ -27,22 +30,17 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  logout(): void {
-    localStorage.removeItem('token');
-  }
-
   isAuthenticated(): boolean {
     const token = localStorage.getItem('token');
     if (!token) return false;
     return true;
   }
 
-    getAuthHeaders(): HttpHeaders {
+  getAuthHeaders(): HttpHeaders {
     const token = this.getToken();
     return new HttpHeaders({
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     });
   }
-
 }

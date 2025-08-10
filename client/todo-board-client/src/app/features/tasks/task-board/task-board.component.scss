@@ -1,0 +1,97 @@
+.board-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 2rem;
+  height: auto;
+}
+
+.column {
+  flex: 1;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  min-width: 350px;
+  max-width: 30%;
+  overflow-y: auto;
+  border-top: 8px solid #ccc;
+  height: auto;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.task-card {
+  background-color: #f0f2f5;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  cursor: grab;
+  border-left: 8px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  position: relative;
+}
+
+.task-card:hover {
+  transform: scale(1.02);
+}
+
+.badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: white;
+  z-index: 1;
+}
+
+.badge-warning {
+  background-color: #e65100;
+  color: white;
+}
+
+.badge-danger {
+  background-color: #b71c1c;
+  color: white;
+}
+
+.snackbar-warning {
+  background-color: #e65100 !important;
+  color: white !important;
+}
+
+.snackbar-error {
+  background-color: #b71c1c !important;
+  color: white !important;
+}
+
+.mat-mdc-snack-bar-container {
+  border-radius: 6px !important;
+  font-size: 0.9rem !important;
+}
+
+.draft-badge {
+  position: absolute;
+  right: 8px;
+  background-color: #4d4c4b;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  top: 8px; /* default if no other badge */
+}
+
+.draft-badge.stack-below {
+  top: 32px; /* push down if another badge exists */
+}

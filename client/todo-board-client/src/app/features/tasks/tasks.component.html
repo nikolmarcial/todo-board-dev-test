@@ -1,17 +1,44 @@
 <div class="dashboard-wrapper">
   <mat-toolbar color="primary" class="toolbar">
-    <span class="app-title">Todo Board</span>
-    <span class="spacer"></span>
-    <button mat-button (click)="logout()">Logout</button>
+    <div class="toolbar-left">
+      <span class="app-title">Simple Todo Board</span>
+    </div>
+    <div class="toolbar-right">
+      <span class="user-greeting">Hello, {{ username }}!</span>
+      <button class="link-button" (click)="openLogoutDialog()">Logout</button>
+    </div>
   </mat-toolbar>
 
   <div class="dashboard-content">
-    <div class="task-list">
-        <app-task-list [tasks]="tasks"></app-task-list>
+    <div class="fab-container">
+      <button
+        mat-fab
+        color="primary"
+        class="fab-button-create"
+        (click)="openTaskDialog()"
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+      <button
+        mat-fab
+        color="accent"
+        class="fab-button-today"
+        (click)="openTodayTasks()"
+      >
+        <mat-icon>event</mat-icon>
+      </button>
     </div>
 
-    <div class="task-create">
-        <app-task-create (taskCreated)="loadTasks()"></app-task-create>
+    <div class="task-list">
+      <app-task-board [tasks]="tasks"></app-task-board>
     </div>
+
+    <!-- <div class="task-list">
+        <app-task-list [tasks]="tasks"></app-task-list>
+    </div> -->
+
+    <!-- <div class="task-create">
+        <app-task-create (taskCreated)="loadTasks()"></app-task-create>
+    </div> -->
   </div>
 </div>
