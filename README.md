@@ -1,44 +1,70 @@
 # To-Do Board
 
 A full-stack task management application with authentication, drag-and-drop board, due date notifications, draft saving, and update history tracking.
+---
 
-## Features
+## 📌 Features
 
 - **Authentication**
-  - User login and registration.
-  - JWT-based authentication.
-
+  - Secure login with JWT
+  - Single user board (one board per account)
 - **Task Management**
-  - Create, edit, and delete tasks.
-  - Categories: "To Do", "In Progress", "Done".
-  - Each task has a title, description, and due date.
-  - Auto-save drafts for interrupted edits.
-  - Due soon and overdue notifications.
+  - Create tasks with:
+    - Title
+    - Description
+    - Label/Category
+    - Due Date
+  - Drag-and-drop tasks between columns
+  - Auto-save description drafts
+  - Expiry date warnings (due soon & overdue)
+  - Task history tracking
+- **UI/UX**
+  - First-time user guide popup after login
+  - Responsive design
+  - Simple "Today's Tasks" modal
+- **Backend**
+  - Node.js + Express API
+  - Microsoft SQL Server database
+- **Frontend**
+  - Angular 17 + Angular Material
 
-- **Drag-and-Drop Board**
-  - Implemented using native HTML Drag and Drop API.
-  - Smooth Trello-like experience.
-
-- **Notifications**
-  - Visual indicators: badges, color changes.
-  - Snackbar toast notifications.
-
-- **History Tracking**
-  - Tracks changes in task status.
+---
+---
 
 ## Tech Stack
 
-**Frontend:** Angular, Angular Material, SCSS  
-**Backend:** Node.js, Express  
-**Database:** Microsoft SQL Server
+**Frontend**
+- Angular 17
+- Angular Material
+- SCSS
 
-## Installation
-
-### Prerequisites
-- Node.js (>= 16.x)
-- npm (>= 8.x)
+**Backend**
+- Node.js
+- Express.js
 - Microsoft SQL Server
-- ODBC Driver 17 for SQL Server
+
+---
+
+## Project Structure
+
+```
+root/
+├── backend/           # Node.js + Express API
+│   ├── config/
+│   ├── middleware/
+│   ├── routes/
+│   ├── server.js
+│   ├── package.json
+│   └── .env
+├── frontend/          # Angular app
+│   ├── src/
+│   ├── angular.json
+│   ├── package.json
+│   └── README.md
+└── database/
+    └── schema.sql     # SQL scripts for database setup
+```
+---
 
 ### Backend Setup
 
@@ -141,13 +167,30 @@ A full-stack task management application with authentication, drag-and-drop boar
    http://localhost:4200
    ```
 
+---
+
 ## Usage
 
-1. Register or log in.
-2. Create tasks and assign categories.
-3. Drag and drop tasks to change their status.
-4. Get notified when tasks are due soon or overdue.
-5. View and manage your task update history.
+1. Register or login.
+2. On **first login**, follow the on-screen **"Got It"** guide explaining:
+   - How to add a task
+   - How to drag & drop between columns
+   - How to view task history
+   - How to check "Today's Tasks"
+3. Create your first task.
+4. Drag and drop to change status.
+5. View history for label changes.
+
+---
+
+## Future Enhancements
+
+- Multiple boards per user
+- Email & push notifications
+- Board sharing with other users
+- Search & filtering
+
+---
 
 ## Git Workflow
 
