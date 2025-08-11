@@ -141,7 +141,6 @@ export class TaskCreateComponent implements OnInit {
           this.taskCreated.emit();
           this.snackBar.open('Task updated successfully!', 'Close', {
             duration: 3000,
-            horizontalPosition: 'left',
           });
           this.dialogRef.close(true);
         },

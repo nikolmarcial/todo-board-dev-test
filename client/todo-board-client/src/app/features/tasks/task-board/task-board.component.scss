@@ -97,12 +97,13 @@ h2 {
   color: white;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 ;
-  padding: 2px 6px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
   z-index: 2;
   top: 8px; /* default if no other badge */
 }
+
 
 .draft-badge.stack-below {
   top: 32px; /* push down if another badge exists */
