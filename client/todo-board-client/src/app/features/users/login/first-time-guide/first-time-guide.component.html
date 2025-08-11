@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Welcome to Simple Todo Board!</h2>
+
+<mat-dialog-content>
+  <p>Here’s how to get started:</p>
+  <ol>
+    <li>Click the <strong>+</strong> button to create your first task.</li>
+    <li>Assign it to a category: <em>To Do</em>, <em>In Progress</em>, or <em>Done</em>.</li>
+    <li>Drag and drop tasks between columns to update progress.</li>
+    <li>Watch out for <span style="color: #e65100;">Due Soon</span> or <span style="color: #b71c1c;">Overdue</span> badges.</li>
+    <li>Click any task to edit it or view its history.</li>
+  </ol>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button class="got-it-btn" (click)="closeGuide()">Got it!</button>
+</mat-dialog-actions>

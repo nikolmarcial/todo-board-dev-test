@@ -53,7 +53,7 @@ A full-stack task management application with authentication, drag-and-drop boar
    npm install
    ```
 
-3. Create `.env` file in the backend root:
+3. Create `.env` file in the backend root. Here's the sample env for local:
    ```env
    PORT=5000
    DB_CONNECTION_STRING=Driver={ODBC Driver 17 for SQL Server};Server=localhost;Database=todo_board;Trusted_Connection=Yes;
@@ -104,7 +104,6 @@ A full-stack task management application with authentication, drag-and-drop boar
          moved_by NVARCHAR(100) NULL,
          CONSTRAINT FK_task_history_tasks_task_id FOREIGN KEY (task_id) REFERENCES dbo.tasks(id)
       );
-
    ```
 
 5. Start the backend server:
@@ -115,8 +114,16 @@ A full-stack task management application with authentication, drag-and-drop boar
 ### Frontend Setup
 
 1. Go to the frontend folder:
+
+   If from backend folder:
    ```bash
    cd ../client/todo-board-cient
+   ```
+
+   If from root folder:
+   ```bash
+   cd client
+   cd todo-board-cient
    ```
 
 2. Install dependencies:

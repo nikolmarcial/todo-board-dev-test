@@ -15,6 +15,7 @@ import {
   MatDatepickerModule,
 } from '@angular/material/datepicker';
 import { ToastService } from '../toast/toast.service';
+import { FirstTimeGuideComponent } from '../users/login/first-time-guide/first-time-guide.component';
 
 @Component({
   selector: 'app-tasks',
@@ -25,6 +26,7 @@ import { ToastService } from '../toast/toast.service';
     MatDialogModule,
     MatIconModule,
     MatNativeDateModule,
+    FirstTimeGuideComponent
   ],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.scss',
@@ -43,6 +45,14 @@ export class TasksComponent implements OnInit {
   ngOnInit() {
     this.loadTasks();
     this.loadUsername();
+
+     if (!localStorage.getItem('hasSeenGuide')) {
+    this.dialog.open(FirstTimeGuideComponent, {
+      width: '500px'
+    }).afterClosed().subscribe(() => {
+      localStorage.setItem('hasSeenGuide', 'true');
+    });
+  }
   }
 
   loadTasks() {
